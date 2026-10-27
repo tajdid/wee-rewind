@@ -1,0 +1,57 @@
+// !$*UTF8*$!
+{ archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
+78B7566671E148CA948C21C5 = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/VintageSideB.png"; sourceTree = SOURCE_ROOT; };
+067D2925451A4AA7A6280A9E = { isa = PBXBuildFile; fileRef = 78B7566671E148CA948C21C5; };
+A15BBA21021B4595AA9BCF3B = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/SuperTapeSideB.png"; sourceTree = SOURCE_ROOT; };
+19C7923277794E19BCA148B9 = { isa = PBXBuildFile; fileRef = A15BBA21021B4595AA9BCF3B; };
+D48844849C0647B6AA2AC6FA = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/OriginalSideB.png"; sourceTree = SOURCE_ROOT; };
+CCC19420ECF24B20BF1C9FFE = { isa = PBXBuildFile; fileRef = D48844849C0647B6AA2AC6FA; };
+00CD278FCB814EB8A6BB23F6 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rewind/TapePersonality.swift"; sourceTree = SOURCE_ROOT; };
+6BE8B3DE98024959971BD5CC = { isa = PBXBuildFile; fileRef = 00CD278FCB814EB8A6BB23F6; };
+A6672AAB1F124BC8968BF141 = { isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Rewind/Resources/TapeClick.wav"; sourceTree = SOURCE_ROOT; };
+61A17521E8B04D8A8D074A66 = { isa = PBXBuildFile; fileRef = A6672AAB1F124BC8968BF141; };
+29CEA17F7E554DFE8181D1DF = { isa = PBXFileReference; lastKnownFileType = file; path = "Rewind/Resources/AnimatedCassette.usdz"; sourceTree = SOURCE_ROOT; };
+876AD1569F794D528D20A634 = { isa = PBXBuildFile; fileRef = 29CEA17F7E554DFE8181D1DF; };
+E6518641A57342B482EF88D4 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rewind/CassetteScene.swift"; sourceTree = SOURCE_ROOT; };
+46039075C7BF405AB2C089BC = { isa = PBXBuildFile; fileRef = E6518641A57342B482EF88D4; };
+77B2A409C66E4F8EB4EBF86D = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/Original.png"; sourceTree = SOURCE_ROOT; };
+A5CE3867FCFC40B09270B73F = { isa = PBXBuildFile; fileRef = 77B2A409C66E4F8EB4EBF86D; };
+6A51E3FB84364888A5CD2987 = { isa = PBXFileReference; lastKnownFileType = file; path = "Rewind/Resources/Psx_Style_Cassette_Tape.usdz"; sourceTree = SOURCE_ROOT; };
+006EACDD25064844B7D683E2 = { isa = PBXBuildFile; fileRef = 6A51E3FB84364888A5CD2987; };
+C1977EF6102345CABDF7BA29 = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/SuperTape.png"; sourceTree = SOURCE_ROOT; };
+AA7855789D2441BD8CA12357 = { isa = PBXBuildFile; fileRef = C1977EF6102345CABDF7BA29; };
+DEA433FCE2D54B81BB3ECFED = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/Vintage.png"; sourceTree = SOURCE_ROOT; };
+3027D2A93315400E9C6419F4 = { isa = PBXBuildFile; fileRef = DEA433FCE2D54B81BB3ECFED; };
+27ACCFB78C76449FBEC16990 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rewind/RewindApp.swift"; sourceTree = SOURCE_ROOT; };
+C2EDF287725D45B2B53019DA = { isa = PBXBuildFile; fileRef = 27ACCFB78C76449FBEC16990; };
+0A952CB3A5B64FE889C90E79 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (6BE8B3DE98024959971BD5CC,46039075C7BF405AB2C089BC,C2EDF287725D45B2B53019DA,); runOnlyForDeploymentPostprocessing = 0; };
+F7210DA7FBC54D8F89B5ACEC = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (067D2925451A4AA7A6280A9E,19C7923277794E19BCA148B9,CCC19420ECF24B20BF1C9FFE,61A17521E8B04D8A8D074A66,876AD1569F794D528D20A634,A5CE3867FCFC40B09270B73F,006EACDD25064844B7D683E2,AA7855789D2441BD8CA12357,3027D2A93315400E9C6419F4,); runOnlyForDeploymentPostprocessing = 0; };
+24A4EB1E81194EB5B5A93CC8 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+1F2E9AA0E84040FF9599BCB4 = { isa = PBXFileReference; explicitFileType = wrapper.application; path = Rewind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+EC79B595B34D4FBEB3EDB008 = { isa = PBXGroup; children = (1F2E9AA0E84040FF9599BCB4,); name = Products; sourceTree = "<group>"; };
+44FA2526079A48F1B3ADB9E6 = { isa = PBXGroup; children = (78B7566671E148CA948C21C5,A15BBA21021B4595AA9BCF3B,D48844849C0647B6AA2AC6FA,00CD278FCB814EB8A6BB23F6,A6672AAB1F124BC8968BF141,29CEA17F7E554DFE8181D1DF,E6518641A57342B482EF88D4,77B2A409C66E4F8EB4EBF86D,6A51E3FB84364888A5CD2987,C1977EF6102345CABDF7BA29,DEA433FCE2D54B81BB3ECFED,27ACCFB78C76449FBEC16990,EC79B595B34D4FBEB3EDB008,); sourceTree = "<group>"; };
+A3B5007B97E540F2A2247366 = { isa = XCBuildConfiguration; name = Debug; buildSettings = { SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; CLANG_ENABLE_MODULES = YES; }; };
+F29EF8C3152347E683F75397 = { isa = XCBuildConfiguration; name = Debug; buildSettings = {
+ PRODUCT_NAME = Rewind; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
+ GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Rewind;
+ INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+ INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+ TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 1.0;
+ SWIFT_EMIT_LOC_STRINGS = YES; ENABLE_PREVIEWS = YES; SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+ }; };
+5A120755522F42898B0C65B8 = { isa = XCBuildConfiguration; name = Release; buildSettings = { SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; CLANG_ENABLE_MODULES = YES; }; };
+E8B76240AB5E4B048E9698CF = { isa = XCBuildConfiguration; name = Release; buildSettings = {
+ PRODUCT_NAME = Rewind; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
+ GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Rewind;
+ INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+ INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+ TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 1.0;
+ SWIFT_EMIT_LOC_STRINGS = YES; ENABLE_PREVIEWS = YES; SWIFT_OPTIMIZATION_LEVEL = "-O";
+ }; };
+77BBAA1341A345878ECF8FEC = { isa = XCConfigurationList; buildConfigurations = (F29EF8C3152347E683F75397,E8B76240AB5E4B048E9698CF,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+17F75F9289EA412D99F87477 = { isa = PBXNativeTarget; buildConfigurationList = 77BBAA1341A345878ECF8FEC; buildPhases = (0A952CB3A5B64FE889C90E79,24A4EB1E81194EB5B5A93CC8,F7210DA7FBC54D8F89B5ACEC,); buildRules = (); dependencies = (); name = Rewind; productName = Rewind; productReference = 1F2E9AA0E84040FF9599BCB4; productType = "com.apple.product-type.application"; };
+51177B5049B7499EB3095FBE = { isa = XCConfigurationList; buildConfigurations = (A3B5007B97E540F2A2247366,5A120755522F42898B0C65B8,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+60386628C9C145B39E206513 = { isa = PBXProject; attributes = { LastUpgradeCheck = 2710; }; buildConfigurationList = 51177B5049B7499EB3095FBE; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; knownRegions = (en,Base); mainGroup = 44FA2526079A48F1B3ADB9E6; productRefGroup = EC79B595B34D4FBEB3EDB008; projectDirPath = ""; projectRoot = ""; targets = (17F75F9289EA412D99F87477,); };
+}; rootObject = 60386628C9C145B39E206513; }

@@ -1,0 +1,11 @@
+.DS_Store
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.mp4
+Preview.png
+MemoryReveal.png
+Screenshots/
+__pycache__/
+*.pyc
