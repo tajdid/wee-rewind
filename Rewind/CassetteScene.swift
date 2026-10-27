@@ -63,6 +63,9 @@ struct CassetteScene: UIViewRepresentable {
         var active = true
         var loading: Task<Void, Never>?
         var subscription: Cancellable?
+        #if DEBUG
+        private static var failNextLoad = ProcessInfo.processInfo.arguments.contains("-simulate-load-failure")
+        #endif
         private let track = Entity()
         private var tapes: [Entity] = []
         private var phase: Float = 0
@@ -90,6 +93,12 @@ struct CassetteScene: UIViewRepresentable {
             loading = Task { [weak self, weak view] in
                 guard let self, let view else { return }
                 do {
+                    #if DEBUG
+                    if Self.failNextLoad {
+                        Self.failNextLoad = false
+                        throw CocoaError(.fileReadNoSuchFile)
+                    }
+                    #endif
                     guard let url = Bundle.main.url(forResource: "AnimatedCassette", withExtension: "usdz") else {
                         throw CocoaError(.fileNoSuchFile)
                     }
@@ -131,6 +140,8 @@ struct CassetteScene: UIViewRepresentable {
                     }
                 } catch is CancellationError { } catch {
                     self.track.children.removeAll()
+                    self.tapes.removeAll()
+                    self.reels.removeAll()
                     onError("Please reopen Rewind or try loading the cassette again.")
                     print("Rewind asset error: \(error)")
                 }

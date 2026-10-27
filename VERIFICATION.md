@@ -22,7 +22,7 @@
 
 ## Remaining physical-device checks
 
-Haptic feel, sustained frame pacing, VoiceOver gesture operation and Reduce Motion behavior should be checked on an iPhone. No physical-device installation or signing team was configured. iPad/landscape layout and iOS 18 runtime compatibility have not been exercised. No automated test suite was added; the interaction verification above was performed against the running simulator UI.
+Haptic feel, sustained frame pacing, VoiceOver gesture operation and Reduce Motion behavior should be checked on an iPhone. No physical-device installation or signing team was configured. iPad/landscape layout and iOS 18 runtime compatibility have not been exercised. The initial interaction verification above was manual; automated coverage was added in the later icon and QA pass below.
 
 ## Spin transition update
 
@@ -103,3 +103,15 @@ Haptic feel, sustained frame pacing, VoiceOver gesture operation and Reduce Moti
 - Tapped back to Side A and verified distinct Side A memories. Tested repeated reversals and browsing back to an already-flipped tape: side persists, stale caption clears, the next reveal matches the current side.
 - Half-turn spring composes with full-turn browse transitions, tilt, reels and the tap dip. Reduce Motion snaps side angles; caption tasks check current theme and side. Accessibility labels include Side A/B and flip instructions. Accessibility motion paths were reviewed in source, not hands-on VoiceOver-tested.
 - Recorded SideBPreview.mp4; saved CompactLayout.png and SideB.png.
+
+
+## App icon and automated QA pass
+
+- Added an opaque 1024-pixel cassette app icon and warm launch background. Inspected the installed icon on the simulator Home Screen.
+- Automated tests passed for all three themes and both sides, delayed-memory cancellation, collection boundaries and load-failure retry on iPhone 18 Pro and iPhone 17e simulators.
+- Replaced the sound control with a native UISwitch after automated touch reliability failures. Its preference-persistence test passed on iPhone 18 Pro after the fix; the complete suite has not yet been rerun on both devices with this final control.
+- Fixed cancelled-drag reset, retry accessibility, movement behind About, and audio preparation on the main thread. Audio preparation/playback now use a dedicated serial queue.
+- Debug builds passed with the final sound control. A Release build passed earlier in this QA pass, before the final sound-control and launch-background changes.
+- Focused motion checks and ARKit USD validation passed. Tools/check_assets.py validates icon dimensions/opacity, all six atlas dimensions, original-model checksum and click format/levels.
+- Hands-on VoiceOver, largest text sizes, Reduce Motion and physical haptic/audio quality remain outside this pass. The physical phone was not updated.
+- Demo video export remains in progress and is not included in this commit.

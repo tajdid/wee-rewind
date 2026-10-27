@@ -1,5 +1,32 @@
 // !$*UTF8*$!
 { archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
+13F1E01D61A44450A7C48DBD = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RewindUITests/RewindUITests.swift"; sourceTree = SOURCE_ROOT; };
+1A50D2E9613B460C811CE356 = { isa = PBXBuildFile; fileRef = 13F1E01D61A44450A7C48DBD; };
+6CFCA29B2A0240AFA58CB58C = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (1A50D2E9613B460C811CE356,); runOnlyForDeploymentPostprocessing = 0; };
+F22E93E5447740828D356E49 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+8D89ECE2E71F41F59287A2DA = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RewindUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+D74667CF1FC74A1B9CE32463 = { isa = PBXContainerItemProxy; containerPortal = 60386628C9C145B39E206513; proxyType = 1; remoteGlobalIDString = 17F75F9289EA412D99F87477; remoteInfo = Rewind; };
+ABB34A98A1CD470EA245AA24 = { isa = PBXTargetDependency; target = 17F75F9289EA412D99F87477; targetProxy = D74667CF1FC74A1B9CE32463; };
+AD03B5B924EC40A983E19837 = { isa = XCBuildConfiguration; name = Debug; buildSettings = { SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+ PRODUCT_NAME = "$(TARGET_NAME)"; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.RewindUITests;
+ GENERATE_INFOPLIST_FILE = YES; TEST_TARGET_NAME = Rewind; SDKROOT = iphoneos;
+ IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2";
+ CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; ENABLE_TESTING_SEARCH_PATHS = YES;
+ LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+ SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+ }; };
+4FD7ABB0B996497B99ED426A = { isa = XCBuildConfiguration; name = Release; buildSettings = {
+ PRODUCT_NAME = "$(TARGET_NAME)"; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.RewindUITests;
+ GENERATE_INFOPLIST_FILE = YES; TEST_TARGET_NAME = Rewind; SDKROOT = iphoneos;
+ IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2";
+ CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; ENABLE_TESTING_SEARCH_PATHS = YES;
+ LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+ SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+ }; };
+65223BADDB5048B480315397 = { isa = XCConfigurationList; buildConfigurations = (AD03B5B924EC40A983E19837,4FD7ABB0B996497B99ED426A,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Debug; };
+6DAB1EBA81FB4F258DEA2BAF = { isa = PBXNativeTarget; name = RewindUITests; productName = RewindUITests; buildConfigurationList = 65223BADDB5048B480315397; buildPhases = (6CFCA29B2A0240AFA58CB58C,F22E93E5447740828D356E49,); buildRules = (); dependencies = (ABB34A98A1CD470EA245AA24,); productReference = 8D89ECE2E71F41F59287A2DA; productType = "com.apple.product-type.bundle.ui-testing"; };
+D5A755285EED4909B42B7DA1 = { isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Rewind/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
+A852D08EBA5E45439D9333FA = { isa = PBXBuildFile; fileRef = D5A755285EED4909B42B7DA1; };
 78B7566671E148CA948C21C5 = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/VintageSideB.png"; sourceTree = SOURCE_ROOT; };
 067D2925451A4AA7A6280A9E = { isa = PBXBuildFile; fileRef = 78B7566671E148CA948C21C5; };
 A15BBA21021B4595AA9BCF3B = { isa = PBXFileReference; lastKnownFileType = image.png; path = "Rewind/Resources/SuperTapeSideB.png"; sourceTree = SOURCE_ROOT; };
@@ -25,16 +52,16 @@ DEA433FCE2D54B81BB3ECFED = { isa = PBXFileReference; lastKnownFileType = image.p
 27ACCFB78C76449FBEC16990 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rewind/RewindApp.swift"; sourceTree = SOURCE_ROOT; };
 C2EDF287725D45B2B53019DA = { isa = PBXBuildFile; fileRef = 27ACCFB78C76449FBEC16990; };
 0A952CB3A5B64FE889C90E79 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (6BE8B3DE98024959971BD5CC,46039075C7BF405AB2C089BC,C2EDF287725D45B2B53019DA,); runOnlyForDeploymentPostprocessing = 0; };
-F7210DA7FBC54D8F89B5ACEC = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (067D2925451A4AA7A6280A9E,19C7923277794E19BCA148B9,CCC19420ECF24B20BF1C9FFE,61A17521E8B04D8A8D074A66,876AD1569F794D528D20A634,A5CE3867FCFC40B09270B73F,006EACDD25064844B7D683E2,AA7855789D2441BD8CA12357,3027D2A93315400E9C6419F4,); runOnlyForDeploymentPostprocessing = 0; };
+F7210DA7FBC54D8F89B5ACEC = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A852D08EBA5E45439D9333FA,067D2925451A4AA7A6280A9E,19C7923277794E19BCA148B9,CCC19420ECF24B20BF1C9FFE,61A17521E8B04D8A8D074A66,876AD1569F794D528D20A634,A5CE3867FCFC40B09270B73F,006EACDD25064844B7D683E2,AA7855789D2441BD8CA12357,3027D2A93315400E9C6419F4,); runOnlyForDeploymentPostprocessing = 0; };
 24A4EB1E81194EB5B5A93CC8 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
 1F2E9AA0E84040FF9599BCB4 = { isa = PBXFileReference; explicitFileType = wrapper.application; path = Rewind.app; sourceTree = BUILT_PRODUCTS_DIR; };
-EC79B595B34D4FBEB3EDB008 = { isa = PBXGroup; children = (1F2E9AA0E84040FF9599BCB4,); name = Products; sourceTree = "<group>"; };
-44FA2526079A48F1B3ADB9E6 = { isa = PBXGroup; children = (78B7566671E148CA948C21C5,A15BBA21021B4595AA9BCF3B,D48844849C0647B6AA2AC6FA,00CD278FCB814EB8A6BB23F6,A6672AAB1F124BC8968BF141,29CEA17F7E554DFE8181D1DF,E6518641A57342B482EF88D4,77B2A409C66E4F8EB4EBF86D,6A51E3FB84364888A5CD2987,C1977EF6102345CABDF7BA29,DEA433FCE2D54B81BB3ECFED,27ACCFB78C76449FBEC16990,EC79B595B34D4FBEB3EDB008,); sourceTree = "<group>"; };
-A3B5007B97E540F2A2247366 = { isa = XCBuildConfiguration; name = Debug; buildSettings = { SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; CLANG_ENABLE_MODULES = YES; }; };
-F29EF8C3152347E683F75397 = { isa = XCBuildConfiguration; name = Debug; buildSettings = {
- PRODUCT_NAME = Rewind; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
+EC79B595B34D4FBEB3EDB008 = { isa = PBXGroup; children = (8D89ECE2E71F41F59287A2DA,1F2E9AA0E84040FF9599BCB4,); name = Products; sourceTree = "<group>"; };
+44FA2526079A48F1B3ADB9E6 = { isa = PBXGroup; children = (13F1E01D61A44450A7C48DBD,D5A755285EED4909B42B7DA1,78B7566671E148CA948C21C5,A15BBA21021B4595AA9BCF3B,D48844849C0647B6AA2AC6FA,00CD278FCB814EB8A6BB23F6,A6672AAB1F124BC8968BF141,29CEA17F7E554DFE8181D1DF,E6518641A57342B482EF88D4,77B2A409C66E4F8EB4EBF86D,6A51E3FB84364888A5CD2987,C1977EF6102345CABDF7BA29,DEA433FCE2D54B81BB3ECFED,27ACCFB78C76449FBEC16990,EC79B595B34D4FBEB3EDB008,); sourceTree = "<group>"; };
+A3B5007B97E540F2A2247366 = { isa = XCBuildConfiguration; name = Debug; buildSettings = { SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; CLANG_ENABLE_MODULES = YES; }; };
+F29EF8C3152347E683F75397 = { isa = XCBuildConfiguration; name = Debug; buildSettings = { SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+ PRODUCT_NAME = Rewind; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
  GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Rewind;
- INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ INFOPLIST_FILE = Rewind/Info.plist; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
  INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
  INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
  TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 1.0;
@@ -42,9 +69,9 @@ F29EF8C3152347E683F75397 = { isa = XCBuildConfiguration; name = Debug; buildSett
  }; };
 5A120755522F42898B0C65B8 = { isa = XCBuildConfiguration; name = Release; buildSettings = { SDKROOT = iphoneos; IPHONEOS_DEPLOYMENT_TARGET = 18.0; SWIFT_VERSION = 5.0; CLANG_ENABLE_MODULES = YES; }; };
 E8B76240AB5E4B048E9698CF = { isa = XCBuildConfiguration; name = Release; buildSettings = {
- PRODUCT_NAME = Rewind; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
+ PRODUCT_NAME = Rewind; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; PRODUCT_BUNDLE_IDENTIFIER = studio.weeinteractions.Rewind;
  GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Rewind;
- INFOPLIST_KEY_UILaunchScreen_Generation = YES; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+ INFOPLIST_FILE = Rewind/Info.plist; INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
  INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
  INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
  TARGETED_DEVICE_FAMILY = "1,2"; CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ZK7K947WHP; CURRENT_PROJECT_VERSION = 1; MARKETING_VERSION = 1.0;
@@ -53,5 +80,5 @@ E8B76240AB5E4B048E9698CF = { isa = XCBuildConfiguration; name = Release; buildSe
 77BBAA1341A345878ECF8FEC = { isa = XCConfigurationList; buildConfigurations = (F29EF8C3152347E683F75397,E8B76240AB5E4B048E9698CF,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
 17F75F9289EA412D99F87477 = { isa = PBXNativeTarget; buildConfigurationList = 77BBAA1341A345878ECF8FEC; buildPhases = (0A952CB3A5B64FE889C90E79,24A4EB1E81194EB5B5A93CC8,F7210DA7FBC54D8F89B5ACEC,); buildRules = (); dependencies = (); name = Rewind; productName = Rewind; productReference = 1F2E9AA0E84040FF9599BCB4; productType = "com.apple.product-type.application"; };
 51177B5049B7499EB3095FBE = { isa = XCConfigurationList; buildConfigurations = (A3B5007B97E540F2A2247366,5A120755522F42898B0C65B8,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-60386628C9C145B39E206513 = { isa = PBXProject; attributes = { LastUpgradeCheck = 2710; }; buildConfigurationList = 51177B5049B7499EB3095FBE; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; knownRegions = (en,Base); mainGroup = 44FA2526079A48F1B3ADB9E6; productRefGroup = EC79B595B34D4FBEB3EDB008; projectDirPath = ""; projectRoot = ""; targets = (17F75F9289EA412D99F87477,); };
+60386628C9C145B39E206513 = { isa = PBXProject; attributes = { LastUpgradeCheck = 2710; }; buildConfigurationList = 51177B5049B7499EB3095FBE; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; knownRegions = (en,Base); mainGroup = 44FA2526079A48F1B3ADB9E6; productRefGroup = EC79B595B34D4FBEB3EDB008; projectDirPath = ""; projectRoot = ""; targets = (17F75F9289EA412D99F87477,6DAB1EBA81FB4F258DEA2BAF,); };
 }; rootObject = 60386628C9C145B39E206513; }

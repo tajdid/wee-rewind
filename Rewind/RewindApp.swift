@@ -49,7 +49,7 @@ struct CollectionView: View {
     @AppStorage("rewind.soundEffectsEnabled") private var soundEnabled = true
     @StateObject private var sound = TapeSound()
     @State private var selection = 0
-    @State private var drag = CGSize.zero
+    @GestureState private var drag = CGSize.zero
     @State private var ready = false
     @State private var tapTrigger = 0
     @State private var lastWake = Date.distantPast
@@ -70,7 +70,7 @@ struct CollectionView: View {
                     Spacer()
                     Button { showingCredits = true } label: {
                         Image(systemName: "info.circle").font(.system(size: 17, weight: .light)).frame(width: 44, height: 44)
-                    }.accessibilityLabel("About Rewind and asset credits")
+                    }.accessibilityLabel("About Rewind and asset credits").accessibilityIdentifier("about")
                 }.padding(.horizontal, 30).padding(.top, 18)
                 Spacer(minLength: 20)
                 VStack(spacing: 8) {
@@ -79,25 +79,18 @@ struct CollectionView: View {
                 }
                 ZStack(alignment: .bottom) {
                     CassetteScene(selection: selection, sides: sides, drag: drag, tapTrigger: tapTrigger, reduceMotion: reduceMotion,
-                                  active: scenePhase == .active, ready: $ready, loadError: $loadError)
+                                  active: scenePhase == .active && !showingCredits, ready: $ready, loadError: $loadError)
                         .id(retry)
                         .allowsHitTesting(false)
                     Ellipse().fill(ink.opacity(0.14)).frame(width: geometry.size.width * 0.53, height: 15).blur(radius: 13).padding(.bottom, 22).allowsHitTesting(false).accessibilityHidden(true)
                     if !ready && loadError == nil {
-                        ProgressView("Finding your tapes…").font(.caption).frame(maxHeight: .infinity)
-                    }
-                    if let loadError {
-                        VStack(spacing: 12) {
-                            Text("The tape couldn’t load.").font(.headline)
-                            Text(loadError).font(.caption).multilineTextAlignment(.center)
-                            Button("Try again") { self.loadError = nil; ready = false; retry = UUID() }.buttonStyle(.bordered)
-                        }.padding().background(Color(hex: 0xF3F0E9))
+                        ProgressView("Finding your tapes…").accessibilityIdentifier("tape.loading").font(.caption).frame(maxHeight: .infinity)
                     }
                 }
                 .frame(height: min(geometry.size.height * 0.40, 380))
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 3)
-                    .onChanged { drag = $0.translation }
+                    .updating($drag) { value, state, _ in state = value.translation }
                     .onEnded { value in
                         let x = value.translation.width
                         let projected = value.predictedEndTranslation.width
@@ -105,7 +98,6 @@ struct CollectionView: View {
                            abs(x) > 65 || (abs(x) > 24 && abs(projected) > 140) {
                             select(selection + (x < 0 ? 1 : -1))
                         }
-                        drag = .zero
                     }.exclusively(before: SpatialTapGesture().onEnded { value in
                         let width = min(geometry.size.width, 640)
                         let height = min(geometry.size.height * 0.40, 380)
@@ -116,8 +108,20 @@ struct CollectionView: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("\(theme.name) cassette, Side \(sides[selection] ? "B" : "A"), \(selection + 1) of 3")
                 .accessibilityHint("Double tap to flip the cassette and reveal a memory. Swipe up or down to change its design")
+                .accessibilityIdentifier("cassette")
+                .accessibilityValue(ready ? "Ready" : "Loading")
                 .accessibilityAction { wakeTape() }
                 .accessibilityAdjustableAction { direction in select(selection + (direction == .increment ? 1 : -1)) }
+                .overlay {
+                    if let loadError {
+                        VStack(spacing: 12) {
+                            Text("The tape couldn’t load.").font(.headline)
+                            Text(loadError).font(.caption).multilineTextAlignment(.center)
+                            Button("Try again") { self.loadError = nil; ready = false; retry = UUID() }
+                                .accessibilityIdentifier("tape.retry").buttonStyle(.bordered)
+                        }.padding().background(Color(hex: 0xF3F0E9))
+                    }
+                }
                 VStack(spacing: 10) {
                     Text(String(format: "%02d / 03", selection + 1) + " · SIDE " + (sides[selection] ? "B" : "A")).font(.system(size: 10, design: .monospaced)).tracking(2).opacity(0.4)
                     ZStack {
@@ -145,6 +149,7 @@ struct CollectionView: View {
                             }
                             .id(memory.id)
                             .accessibilityElement(children: .combine)
+                            .accessibilityIdentifier("memory.caption")
                             .transition(reduceMotion ? .opacity : .opacity.combined(with: .offset(y: 6)))
                         } else {
                             Text(theme.subtitle).font(.system(size: 12)).opacity(0.5)
@@ -168,12 +173,13 @@ struct CollectionView: View {
                                     .frame(width: selection == item.rawValue ? 22 : 5, height: 5)
                                 Text(item.name).font(.system(size: 10)).opacity(selection == item.rawValue ? 0.9 : 0.4)
                             }.frame(maxWidth: .infinity).frame(minHeight: 48)
-                        }.accessibilityAddTraits(selection == item.rawValue ? .isSelected : [])
+                        }.accessibilityIdentifier("theme.\(item.rawValue)")
+                        .accessibilityAddTraits(selection == item.rawValue ? .isSelected : [])
                     }
                 }.padding(.horizontal, 44)
                 Text("SWIPE TO BROWSE · DRAG TO TILT").font(.system(size: 8, design: .monospaced)).tracking(1.5).opacity(0.35).padding(.top, 20).padding(.bottom, 25)
             }
-            .animation(reduceMotion ? .easeOut(duration: 0.2) : .spring(duration: 0.6, bounce: 0.08), value: revealedMemory)
+            .animation(reduceMotion ? nil : .spring(duration: 0.6, bounce: 0.08), value: revealedMemory)
             .frame(maxWidth: 640).frame(maxWidth: .infinity)
         }
         .foregroundStyle(ink)
@@ -185,7 +191,7 @@ struct CollectionView: View {
             catch { return }
             guard !Task.isCancelled, memory.theme.rawValue == selection, memory.sideB == sides[selection],
                   ready, scenePhase == .active, !showingCredits else { return }
-            withAnimation(reduceMotion ? .easeOut(duration: 0.2) : .spring(duration: 0.6, bounce: 0.08)) {
+            withAnimation(reduceMotion ? nil : .spring(duration: 0.6, bounce: 0.08)) {
                 revealedMemory = memory
             }
             if UIAccessibility.isVoiceOverRunning {
@@ -211,12 +217,16 @@ struct CollectionView: View {
                 Text("Wee Interactions / 002").font(.caption.monospaced()).foregroundStyle(.secondary)
                 Text("Rewind").font(.system(.largeTitle, design: .serif))
                 Text("Made by Tajdid Rahman").font(.subheadline)
-                Toggle("Sound effects", isOn: $soundEnabled).tint(Color(hex: 0xF36B3F))
+                HStack {
+                    Text("Sound effects")
+                    Spacer()
+                    SoundEffectsSwitch(isOn: $soundEnabled).frame(width: 60, height: 32)
+                }
                 Text("A playful cassette collection, made with SwiftUI and RealityKit.")
                 Text("3D model: “Psx Style Cassette Tape” by pixapexel. Licensed under CC BY 4.0. Reel sections are separated for animation; Super Tape and Vintage use recolored texture atlases.").font(.footnote)
                 Link("View original model ↗", destination: URL(string: "https://sketchfab.com/3d-models/psx-style-cassette-tape-f56e93a81751426e90f772c29039bd08")!)
                 Link("Creative Commons Attribution 4.0 ↗", destination: URL(string: "https://creativecommons.org/licenses/by/4.0/")!)
-                Button("Done") { showingCredits = false }.buttonStyle(.bordered)
+                Button("Done") { showingCredits = false }.accessibilityIdentifier("about.done").buttonStyle(.bordered)
             }.padding(30)
             }.presentationDetents([.medium, .large])
         }
@@ -249,13 +259,42 @@ struct CollectionView: View {
 }
 
 
-/// Short, preloaded interaction audio. Ambient respects silent mode and mixes
-/// with music already playing; it never requests background playback or input.
-@MainActor
-private final class TapeSound: ObservableObject {
-    private var player: AVAudioPlayer?
+/// A direct native control keeps the setting's touch and accessibility hit areas
+/// identical, including when the enclosing sheet is still settling.
+private struct SoundEffectsSwitch: UIViewRepresentable {
+    @Binding var isOn: Bool
+    func makeCoordinator() -> Coordinator { Coordinator(isOn: $isOn) }
+    func makeUIView(context: Context) -> UISwitch {
+        let control = UISwitch()
+        control.setOn(isOn, animated: false)
+        control.onTintColor = UIColor(red: 243/255, green: 107/255, blue: 63/255, alpha: 1)
+        control.accessibilityLabel = "Sound effects"
+        control.accessibilityIdentifier = "sound.effects"
+        control.addTarget(context.coordinator, action: #selector(Coordinator.changed(_:)), for: .valueChanged)
+        return control
+    }
+    func updateUIView(_ control: UISwitch, context: Context) {
+        context.coordinator.isOn = $isOn
+        if control.isOn != isOn { control.setOn(isOn, animated: false) }
+    }
+    final class Coordinator: NSObject {
+        var isOn: Binding<Bool>
+        init(isOn: Binding<Bool>) { self.isOn = isOn }
+        @objc func changed(_ control: UISwitch) { isOn.wrappedValue = control.isOn }
+    }
+}
+
+/// All audio state stays on one serial queue, including potentially blocking
+/// session preparation. SwiftUI never waits for audio hardware on its UI thread.
+private final class TapeSound: ObservableObject, @unchecked Sendable {
+    private let queue = DispatchQueue(label: "studio.weeinteractions.Rewind.sound", qos: .userInitiated)
+    private var player: AVAudioPlayer? // Accessed only by queue.
 
     init() {
+        queue.async { [weak self] in self?.prepare() }
+    }
+
+    private func prepare() {
         do {
             try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
             guard let url = Bundle.main.url(forResource: "TapeClick", withExtension: "wav") else { return }
@@ -266,21 +305,23 @@ private final class TapeSound: ObservableObject {
             player.prepareToPlay()
             self.player = player
         } catch {
-            // Motion and haptics remain usable if audio is unavailable.
             print("Rewind sound unavailable: \(error)")
         }
     }
 
     func playClick(rate: Float) {
-        guard let player else { return }
-        player.currentTime = 0
-        player.rate = rate
-        player.play()
+        queue.async { [weak self] in
+            guard let player = self?.player else { return }
+            player.currentTime = 0
+            player.rate = rate
+            player.play()
+        }
     }
 
     func stop() {
-        player?.stop()
-        player?.currentTime = 0
-        player?.prepareToPlay()
+        queue.async { [weak self] in
+            self?.player?.stop()
+            self?.player?.currentTime = 0
+        }
     }
 }

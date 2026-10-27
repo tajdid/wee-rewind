@@ -55,6 +55,10 @@ The app caches all three cassettes and their materials. Independent per-tape sta
 
 The project builds for Simulator. Manual simulator checks cover the three themes, tap/drag/swipe interaction, flips, labels, memories, rapid switching and the sound toggle. The adapted USDZ passes Apple’s `usdchecker --arkit` validation.
 
+The shared scheme includes UI tests for both sides of each theme, navigation boundaries, memory cancellation, load retry and the persistent sound preference. Run them with Product → Test in Xcode. See the verification record for the latest device-specific results.
+
+The app includes a custom cassette icon and warm launch background. Icon generation details are in [Design/AppIcon.md](Design/AppIcon.md).
+
 Run the focused motion checks from this directory:
 
 ```sh
