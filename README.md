@@ -1,79 +1,111 @@
-# Wee Interactions / 002 — Rewind
+# Rewind
+### Wee Interactions / 002
 
 **Press play on a simpler time.**
 
-A playful native iOS cassette collection built with SwiftUI and RealityKit. Swipe through three themed tapes, drag to tilt, and tap to flip between Side A and Side B. Each side reveals a short fictional memory, accompanied by moving reel hubs, a quiet mechanical click and a restrained haptic.
+A small SwiftUI interaction design experiment about making a digital object feel tactile. Browse three cassette tapes, drag to tilt them, and tap to flip from Side A to Side B. Spring motion, spinning reels, a mechanical click and a soft haptic give each gesture a little weight.
 
-<img src="CompactLayout.png" alt="Rewind’s compact Side A layout" width="280"> <img src="SideB.png" alt="Side B with a handwritten label and revealed memory" width="280">
+<p>
+  <img src="CompactLayout.png" alt="Rewind showing the Original cassette on Side A in its compact layout" width="280">
+  <img src="SideB.png" alt="The cassette flipped to Side B, with a handwritten label and a revealed fictional memory" width="280">
+</p>
 
-## The experience
+Built for iOS with **SwiftUI + RealityKit**. The experience runs locally, with bundled artwork and sound. It is a cassette interaction study; it does not play music or connect to a streaming service.
 
-- **Original:** soft, gently springy motion.
-- **Super Tape:** a slightly quicker, tighter response.
-- **Vintage:** calmer floating, slower reels and a more relaxed settle.
-- One full entrance turn when browsing, with a small spring finish. Taps turn the cassette over by half a turn.
-- Handwritten Side B labels and a different memory on each side. The details shift naturally as the memory appears; browsing away clears the caption.
-- Independently rotating reel hubs accelerate and coast to a stop. Repeated taps restart them without resetting their angle.
-- An original, preloaded mechanical click respects silent mode and mixes with other audio. The info sheet includes a persistent Sound effects toggle.
-- VoiceOver actions and side labels, plus reduced spatial motion when Reduce Motion is enabled.
+## Try the interaction
 
-This is a small tactile experiment: no music library, streaming, backend or web views.
+- **Swipe to browse** Original, Super Tape and Vintage, or choose a tape using the buttons below it. The collection stops at either end.
+- **Drag to tilt** the cassette, then release to let it settle.
+- **Tap to flip** between Side A and Side B. The cassette dips, its reels accelerate and coast, and a short fictional memory appears after the turn.
+- **Open About** for credits and the persistent Sound effects toggle.
 
-## Run
+Each tape remembers its side while you browse during the session. Switching tapes clears the caption; the next tap reveals the memory for the newly selected side. All six memories are authored vignettes.
 
-Open `Rewind.xcodeproj`, select the **Rewind** scheme and an iPhone simulator, then Run.
+## The design experiment
 
-- Deployment target: iOS 18+
-- Built and checked with Xcode 27.1 / iOS 27 Simulator
-- No third-party app dependencies
+Rewind explores how a shared interaction can take on a subtly different character through timing and feedback.
 
-For a physical iPhone, choose your own development team under Signing & Capabilities before running. This project is separate from Little Dice, with bundle identifier `studio.weeinteractions.Rewind`.
+| Tape | Character |
+| --- | --- |
+| **Original** | Soft, gently springy motion |
+| **Super Tape** | Quicker turns and a tighter settle |
+| **Vintage** | Calmer floating, slower reels and a more relaxed return |
 
-## Interaction details
+Browsing introduces the selected cassette with one full turn and a small spring finish. Tapping adds a half-turn flip, a restrained dip, reel motion and feedback. These movements compose, so a tap can happen while a browse transition is still settling. Repeated taps restart the reel impulse without resetting its angle.
 
-Short drags tilt the tape. A horizontal drag over 65 points, or a flick over 24 points with projected travel over 140 points, selects an adjacent tape. The collection stops at each end. Theme buttons provide direct selection.
+Handwritten Side B labels and a compact caption reveal complete the interaction. The layout expands with the memory instead of reserving an empty text area.
 
-An accepted tap triggers the dip, flip, reel motion, click and haptic. A 0.35-second cooldown keeps repeated taps controlled. Each tape remembers its current side while browsing during the session. The memory appears after a short delay, guarded against intervening side or theme changes. Reduce Motion snaps the flip and fades the caption.
+VoiceOver exposes the current tape and side, a flip action and adjustable browsing. Reduce Motion removes spatial animation and keeps caption transitions simple. These paths are implemented; hands-on accessibility checks remain part of the verification work.
 
-All six memories are authored sample vignettes, not retrieved personal memories. There are no network calls or user-data storage beyond the local sound preference.
+## Run locally
 
-## Implementation
+1. Clone the repository:
 
-| File | Purpose |
-|---|---|
-| `Rewind/RewindApp.swift` | SwiftUI layout, gestures, memories, side state, audio and credits |
-| `Rewind/CassetteScene.swift` | Async asset loading, non-AR scene, spring motion, flips and reels |
-| `Rewind/TapePersonality.swift` | Shared motion curves and subtle per-theme tuning |
-| `Rewind/Resources/` | Original model, animated derivative, themed atlases and click |
-| `Tools/` | Reproducible asset/sound preparation and focused motion checks |
+   ```sh
+   git clone https://github.com/tajdid/wee-rewind.git
+   cd wee-rewind
+   open Rewind.xcodeproj
+   ```
 
-The source cassette has a baked photographic texture; its transparent appearance is painted rather than physically translucent. The derivative splits the inner reel hubs from the shell and separates back-facing surfaces for readable Side B artwork. Original source geometry and artwork remain available in the untouched source USDZ.
+2. Select the **Rewind** scheme and an **iPhone simulator**.
+3. Choose **Product → Run**.
 
-The app caches all three cassettes and their materials. Independent per-tape state keeps reel animation and flips coherent while browsing. Movement pauses while inactive. Asset loading includes a progress indicator, cancellation and retry state.
+You need macOS with Xcode and an iOS Simulator runtime. The deployment target is **iOS 18.0**; the repository's recorded build environment is **Xcode 27.1 / iOS 27.0 Simulator**. iOS 18 runtime compatibility has not been exercised in the verification record.
 
-## Verification
+There are **no third-party app dependencies**, API keys or backend services to configure. The generated models, textures and click sound are already bundled; asset preparation scripts are optional.
 
-The project builds for Simulator. Manual simulator checks cover the three themes, tap/drag/swipe interaction, flips, labels, memories, rapid switching and the sound toggle. The adapted USDZ passes Apple’s `usdchecker --arkit` validation.
+For a physical iPhone, select your own development team under **Signing & Capabilities**. The app bundle identifier is `studio.weeinteractions.Rewind`. Although the project also targets iPad, iPad and landscape layouts have not been verified.
 
-The shared scheme includes UI tests for both sides of each theme, navigation boundaries, memory cancellation, load retry and the persistent sound preference. Run them with Product → Test in Xcode. See the verification record for the latest device-specific results.
+For gesture tuning, horizontal browsing requires a drag more horizontal than vertical by a factor of 1.3, plus either over 65 points of travel or a flick over 24 points with projected travel over 140 points. Accepted taps have a 0.35-second cooldown. Memory reveals wait 480 ms and check the current theme, side and app state before appearing.
 
-The app includes a custom cassette icon and warm launch background. Icon generation details are in [Design/AppIcon.md](Design/AppIcon.md).
+## Inside the project
 
-Run the focused motion checks from this directory:
+| File | Responsibility |
+| --- | --- |
+| [RewindApp.swift](Rewind/RewindApp.swift) | SwiftUI layout, gestures, theme and side state, memory reveals, audio and About |
+| [CassetteScene.swift](Rewind/CassetteScene.swift) | RealityKit non-AR scene, async loading, spring motion, flips and independent reels |
+| [TapePersonality.swift](Rewind/TapePersonality.swift) | Shared motion curves and per-tape timing, sound rate and haptic intensity |
+| [Resources](Rewind/Resources/) | Source and adapted USDZ models, six texture atlases and the click sound |
+| [RewindUITests](RewindUITests/RewindUITests.swift) | Interaction, navigation, retry and sound-preference UI tests |
+| [Tools](Tools/) | Asset preparation, asset validation and focused motion checks |
+
+The scene loads one model asynchronously, clones it for the three themes and caches their materials. Each tape has independent flip and reel state. Motion pauses while the app is inactive or About is open; loading includes progress, cancellation and retry handling.
+
+The original cassette uses a baked photographic texture: its transparent appearance is painted into the artwork. The animated derivative separates the inner reel hubs from the shell and gives back-facing surfaces readable Side B artwork. The source USDZ is preserved unchanged.
+
+Audio uses a preloaded `AVAudioPlayer` on a dedicated serial queue. Its ambient session is configured to respect silent mode and mix with other audio. The app stores the sound preference locally; it makes no network requests.
+
+## Checks and current limits
+
+The [verification record](VERIFICATION.md) documents successful simulator builds and manual interaction checks. It also records automated passes for theme/side coverage, navigation boundaries, memory cancellation and load retry on iPhone 18 Pro and iPhone 17e simulators.
+
+The final sound-switch persistence test passed on iPhone 18 Pro. The full suite has not yet been rerun on both simulators after that control changed. Hands-on VoiceOver, largest text sizes, Reduce Motion, physical haptic/audio quality and sustained performance remain to be checked.
+
+To run the UI suite, choose **Product → Test** with the **Rewind** scheme and an iPhone simulator.
+
+Run the focused motion checks from the repository root:
 
 ```sh
 swiftc Rewind/TapePersonality.swift Tools/check_personalities.swift -o /tmp/check-rewind
 /tmp/check-rewind
 ```
 
-These check one-turn bounds, spring continuity, final rest and restrained motion/audio/haptic ranges. See [VERIFICATION.md](VERIFICATION.md) for the full record and limits. Physical haptic feel, silent-switch behavior and sustained performance need hands-on review of the current build. Simulator recordings remain local and are excluded from Git.
+These check single-turn bounds, spring continuity, final rest, bounded dip and restrained sound/haptic variation.
 
-Asset preparation scripts use Apple’s USD tools. `make_side_b.py` additionally requires Pillow and the indicated macOS fonts. Generated app assets are already included, so these scripts are not needed to run the app.
+Validate bundled assets with Python 3 (standard library only):
+
+```sh
+python3 Tools/check_assets.py
+```
+
+This checks the app icon, six texture atlas dimensions, original-model checksum and click audio format and levels. The adapted USDZ also passed Apple's `usdchecker --arkit` validation in the recorded QA pass.
+
+Asset preparation uses Apple's USD tools; `make_side_b.py` also requires Pillow and the macOS fonts named in the script. See [ASSET-ASSESSMENT.md](ASSET-ASSESSMENT.md) for asset details and [Design/AppIcon.md](Design/AppIcon.md) for the icon workflow. Demo recordings remain local and are excluded from Git.
 
 ## Credits
 
-Made by **Tajdid Rahman**.
+Made by **Tajdid Rahman** as part of **Wee Interactions**.
 
-Cassette model: [“Psx Style Cassette Tape” by pixapexel](https://sketchfab.com/3d-models/psx-style-cassette-tape-f56e93a81751426e90f772c29039bd08), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Geometry separation, themed atlases and Side B notes are adaptations. The tap click is an original procedural sound with no third-party samples.
+Cassette model: [“Psx Style Cassette Tape” by pixapexel](https://sketchfab.com/3d-models/psx-style-cassette-tape-f56e93a81751426e90f772c29039bd08), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Rewind adapts the geometry, themed texture atlases and Side B artwork. The mechanical click was synthesized for this project without third-party samples.
 
-See [ATTRIBUTION.md](ATTRIBUTION.md), [ASSET-ASSESSMENT.md](ASSET-ASSESSMENT.md) and [SOUND-SOURCES.md](SOUND-SOURCES.md) for provenance and sound-replacement guidance.
+See [ATTRIBUTION.md](ATTRIBUTION.md) for asset credits and adaptations, and [SOUND-SOURCES.md](SOUND-SOURCES.md) for sound provenance and replacement guidance.
