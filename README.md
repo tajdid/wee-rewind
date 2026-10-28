@@ -2,15 +2,24 @@
 
 **Press play on a simpler time.**
 
-A playful native iOS cassette collection built with SwiftUI and RealityKit. Swipe through three themed tapes, drag to tilt, and tap to flip between Side A and Side B. Each side reveals a short fictional memory, accompanied by moving reel hubs, a quiet mechanical click and a restrained haptic.
+A little tribute to mixtapes, bedroom DJ sets and the tapes you kept long after the last track faded. Rewind is a playful native iOS cassette collection built with SwiftUI and RealityKit. Swipe through three themed tapes, drag to tilt, and tap to flip between Side A and Side B. Each side reveals a short fictional memory, accompanied by moving reel hubs, a quiet mechanical click and a restrained haptic.
 
 <img src="CompactLayout.png" alt="Rewind’s compact Side A layout" width="280"> <img src="SideB.png" alt="Side B with a handwritten label and revealed memory" width="280">
 
+## The influence
+
+Handwritten track lists. A favourite mix passed between friends. Turning a tape over to find out what comes next. Rewind borrows from the personal side of music culture: the care of putting a selection together and the memories that stay attached to it.
+
+That influence comes through in the warm paper palette, label artwork and small mechanical details. Each cassette has its own tempo, expressed through motion, a quiet click and the pause before a memory appears. The sound is limited to interaction effects; the tapes hold fictional memories rather than playable tracks.
+
+## The selection
+
+- **Original:** the familiar favourite — warm orange and cream, with soft, gently springy motion.
+- **Super Tape:** a brighter change of pace — navy, teal and pink, with a slightly quicker, tighter response.
+- **Vintage:** the late-night closer — charcoal, red and cream, with calmer floating, slower reels and a more relaxed settle.
+
 ## The experience
 
-- **Original:** soft, gently springy motion.
-- **Super Tape:** a slightly quicker, tighter response.
-- **Vintage:** calmer floating, slower reels and a more relaxed settle.
 - One full entrance turn when browsing, with a small spring finish. Taps turn the cassette over by half a turn.
 - Handwritten Side B labels and a different memory on each side. The details shift naturally as the memory appears; browsing away clears the caption.
 - Independently rotating reel hubs accelerate and coast to a stop. Repeated taps restart them without resetting their angle.
